@@ -2,32 +2,47 @@ from random import randint
 import string
 import time
 from sys import exit
+import sys,string
 
 
-while True:
-    print "\tGuess A Number Between 1 to 50!\n"
+def playGame():
+        #retrieve the user's guess
+        guess = input("What is your guess? Type a number [1 ~ 50]\n: ")
 
-    guessMe = randint (1,50)
-
-    guess = input("What is your guess? Type a number [1 ~ 50] : ")
-    while True:
         if guessMe == guess:
-            print "Correct! \n"
-
-            while True:
-                choice = raw_input("Do you want to play again? Type [y/n] :")
-                if choice == 'y':
-                    print "Okay! Let's Play Again!\n"
-                elif choice == 'n':
-                    sys.exit()
-                else:
-                    print "Invalid option. Please Type 'y' or 'n'"
+            print "\tCorrect!\n"
+            playAgain()
 
         elif guessMe < guess:
-                print "Too high! Try Again!\n"
+            print "Too high! Try Again!\n"
+            playGame()
 
         elif guessMe > guess:
             print "Too low! Try Again!\n"
+            playGame()
 
         else:
-            print "Invalid input. Please Type a Number 1 to 50 "
+            print "Invalid input. Please Type a Number 1 to 50.\n "
+            playGame()
+
+def playAgain():
+    choice = raw_input("PLAY AGAIN? [y]\nNo.Exit the program. [n]\n:")
+    if choice == 'y':
+        print "Okay! Let's Play Again!\n"
+        rePlay()
+    elif choice == 'n':
+        print "Exiting the program...\n\nGood Bye!"
+        time.sleep(0.5)
+        sys.exit()
+    else:
+        print "Invalid option. Please Type 'y' or 'n'\n"
+        playAgain()
+
+def rePlay():
+    guessMe=randint(1,50)
+    playGame()
+
+
+while True:
+    guessMe =randint(1,50)
+    playGame()
